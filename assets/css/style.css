@@ -125,8 +125,7 @@ img{ max-width: 100%; display: block; }
   padding: 0 var(--gutter);
 }
 
-/* Blocca scroll page quando drawer aperto (JS aggiunge .no-scroll) */
-body.no-scroll{ overflow: hidden; }
+
 
 /* =========================
    Accessibilità: skip-link + focus
@@ -272,15 +271,7 @@ html[data-theme="dark"] .list{ color: rgba(231,238,252,0.78); }
 /* =========================
    Overlay + Drawer (mobile)
    ========================= */
-.overlay{
-  position: fixed;
-  inset: 0;
-  background: rgba(2, 6, 23, 0.40);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--dur) var(--ease);
-  z-index: 60;
-}
+
 
 /* Glass solo se supportato (fallback = semplice overlay opaco) */
 @supports ((backdrop-filter: blur(6px)) or (-webkit-backdrop-filter: blur(6px))){
@@ -295,7 +286,7 @@ html[data-theme="dark"] .overlay{ background: rgba(0,0,0,0.55); }
 
 .mobile-drawer{
   position: fixed;
-  top: 0;
+   top: var(--headerH);
   right: 0;
   height: 100vh;
   width: var(--drawerW);
@@ -531,6 +522,11 @@ html[data-theme="dark"] .navlinks a{
 html[data-theme="dark"] .navlinks a:hover{
   background: rgba(255,255,255,0.06);
   color: rgba(231,238,252,0.95);
+}
+
+.navlinks a[href="#abstract"]:hover{
+  background: rgba(22,163,74,0.08);
+  border-color: rgba(22,163,74,0.25);
 }
 
 /* Active links (desktop + mobile) */
@@ -1240,3 +1236,14 @@ html[data-theme="dark"] .footer{
   padding-top: 24px;
   padding-bottom: 24px;
 }
+
+
+.mobile-drawer{
+  background: #ffffff !important;
+  
+}
+
+html[data-theme="dark"] .mobile-drawer{
+  background: #0b1220 !important;
+}
+

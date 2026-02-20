@@ -1,15 +1,9 @@
-(function(){
-  const btn = document.querySelector('[data-menu-btn]');
-  const mobile = document.querySelector('[data-mobile]');
-  if(btn && mobile){
-    btn.addEventListener('click', () => {
-      const isOpen = mobile.style.display === 'block';
-      mobile.style.display = isOpen ? 'none' : 'block';
-      btn.setAttribute('aria-expanded', String(!isOpen));
-    });
-  }
-  const y = document.querySelector('[data-year]');
-  if(y){ y.textContent = String(new Date().getFullYear()); }
+(function () {
+  // =========================
+  // Footer year
+  // =========================
+  const y = document.querySelector("[data-year]");
+  if (y) y.textContent = String(new Date().getFullYear());
 })();
 
 (() => {
@@ -29,7 +23,8 @@
   applyTheme(localStorage.getItem("theme") === "dark" ? "dark" : "light");
 
   themeBtn?.addEventListener("click", () => {
-    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    const next =
+      root.getAttribute("data-theme") === "dark" ? "light" : "dark";
     localStorage.setItem("theme", next);
     applyTheme(next);
   });
@@ -47,64 +42,44 @@
       lastScrolled = scrolled;
     }
   }
+
   updateHeaderScrolled();
   window.addEventListener("scroll", updateHeaderScrolled, { passive: true });
 
   // =========================
-  // Mobile drawer
+  // Mobile menu (NON modal)
   // =========================
   const menuBtn = document.querySelector("[data-menu-btn]");
   const drawer = document.querySelector("[data-mobile]");
-  const overlay = document.querySelector("[data-overlay]");
-  const closeBtn = document.querySelector("[data-close-mobile]");
 
-  const focusableSelector =
-    'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
-
-  let lastFocusedEl = null;
-
-  function setOverlay(show) {
-    if (!overlay) return;
-    overlay.hidden = !show;
-    overlay.classList.toggle("show", show);
+  function toggleDrawer() {
+    const isOpen = drawer.classList.toggle("open");
+    drawer.setAttribute("aria-hidden", String(!isOpen));
+    menuBtn.setAttribute("aria-expanded", String(isOpen));
   }
 
-  function openDrawer() {
-    lastFocusedEl = document.activeElement;
-    drawer.classList.add("open");
-    drawer.setAttribute("aria-hidden", "false");
-    menuBtn.setAttribute("aria-expanded", "true");
-    document.body.classList.add("no-scroll");
-    setOverlay(true);
-    drawer.querySelector(focusableSelector)?.focus();
-  }
+  menuBtn?.addEventListener("click", toggleDrawer);
 
-  function closeDrawer() {
-    drawer.classList.remove("open");
-    drawer.setAttribute("aria-hidden", "true");
-    menuBtn.setAttribute("aria-expanded", "false");
-    document.body.classList.remove("no-scroll");
-    setOverlay(false);
-    lastFocusedEl?.focus?.();
-  }
-
-  menuBtn?.addEventListener("click", () =>
-    drawer.classList.contains("open") ? closeDrawer() : openDrawer()
-  );
-  closeBtn?.addEventListener("click", closeDrawer);
-  overlay?.addEventListener("click", closeDrawer);
+  // Chiudi menu quando clicchi un link
+  drawer?.addEventListener("click", (e) => {
+    const a = e.target.closest("a[href^='#']");
+    if (a) {
+      drawer.classList.remove("open");
+      drawer.setAttribute("aria-hidden", "true");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+  });
 
   // =========================
-  // 🔥 ABSTRACT VISIBILITY (JS-ONLY)
+  // Abstract: visibile solo dopo scroll
   // =========================
   const abstract = document.getElementById("abstract");
 
   if (abstract) {
-    // Nascondi Abstract al load
     abstract.style.visibility = "hidden";
 
     if ("IntersectionObserver" in window) {
-      const showAbstractObs = new IntersectionObserver(
+      const absObs = new IntersectionObserver(
         (entries, obs) => {
           if (entries[0].isIntersecting) {
             abstract.style.visibility = "visible";
@@ -112,76 +87,110 @@
           }
         },
         {
-          root: null,
           rootMargin: "0px 0px -20% 0px",
-          threshold: 0
+          threshold: 0,
         }
       );
 
-      showAbstractObs.observe(abstract);
+      absObs.observe(abstract);
     }
   }
 
   // =========================
-  // Active nav link on scroll
+  // Active nav link (FIX DEFINITIVO)
   // =========================
-  const desktopLinks = Array.from(document.querySelectorAll("[data-nav] a[href^='#']"));
-  const mobileLinks = Array.from(document.querySelectorAll("[data-nav-mobile] a[href^='#']"));
+  const desktopLinks = Array.from(
+    document.querySelectorAll("[data-nav] a[href^='#']")
+  );
+  const mobileLinks = Array.from(
+    document.querySelectorAll("[data-nav-mobile] a[href^='#']")
+  );
   const allLinks = [...desktopLinks, ...mobileLinks];
 
   const linkById = new Map();
+
   for (const a of allLinks) {
     const id = a.getAttribute("href")?.slice(1);
-    if (!id || id === "abstract") continue; // 👈 Abstract escluso
+    if (!id || id === "abstract") continue;
     if (!linkById.has(id)) linkById.set(id, []);
     linkById.get(id).push(a);
   }
 
   function setActiveSection(id) {
-    allLinks.forEach(a => {
+    allLinks.forEach((a) => {
       a.classList.remove("active");
       a.removeAttribute("aria-current");
     });
-    linkById.get(id)?.forEach(a => {
+    linkById.get(id)?.forEach((a) => {
       a.classList.add("active");
       a.setAttribute("aria-current", "page");
     });
   }
 
+  // 🔒 lock per evitare il bug sul click
+  let lockActive = false;
+  let unlockTimer = null;
+
+  function lockActiveTemporarily(id) {
+    lockActive = true;
+    setActiveSection(id);
+
+    clearTimeout(unlockTimer);
+    unlockTimer = setTimeout(() => {
+      lockActive = false;
+    }, 450); // durata smooth scroll
+  }
+
+  // click su nav → forza active
+  allLinks.forEach((a) => {
+    a.addEventListener("click", () => {
+      const id = a.getAttribute("href")?.slice(1);
+      if (id) lockActiveTemporarily(id);
+    });
+  });
+
+  // =========================
+  // IntersectionObserver sezioni
+  // =========================
   const sections = Array.from(
     document.querySelectorAll("main section[id]:not(#abstract)")
   );
 
   if ("IntersectionObserver" in window && sections.length) {
-    const header = document.querySelector('[data-header]');
-    const HEADER_OFFSET = header?.offsetHeight
-      ? header.offsetHeight + 20
-      : 96;
+    const headerH = header?.offsetHeight ?? 76;
 
     const navObs = new IntersectionObserver(
       (entries) => {
+        if (lockActive) return;
+
         const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          .filter((e) => e.isIntersecting)
+          .sort(
+            (a, b) =>
+              a.boundingClientRect.top - b.boundingClientRect.top
+          );
 
         if (visible.length) {
           setActiveSection(visible[0].target.id);
         }
       },
       {
-        rootMargin: `-${HEADER_OFFSET}px 0px -200px 0px`,
-        threshold: 0
+        rootMargin: `-${headerH + 20}px 0px -200px 0px`,
+        threshold: 0,
       }
     );
 
-    sections.forEach(s => navObs.observe(s));
+    sections.forEach((s) => navObs.observe(s));
     setActiveSection(sections[0].id);
   }
 
   // =========================
   // Reveal animations
   // =========================
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
   const revealEls = Array.from(document.querySelectorAll(".reveal"));
 
   if (!prefersReduced && "IntersectionObserver" in window) {
@@ -197,8 +206,8 @@
       { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
     );
 
-    revealEls.forEach(el => rObs.observe(el));
+    revealEls.forEach((el) => rObs.observe(el));
   } else {
-    revealEls.forEach(el => el.classList.add("is-visible"));
+    revealEls.forEach((el) => el.classList.add("is-visible"));
   }
 })();
