@@ -4,30 +4,125 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Don’t Trust Your Agents, Verify Them — AAMAS 2026 Tutorial</title>
+
   <meta name="description" content="A half-day AAMAS 2026 tutorial on strategic verification with VITAMIN: from strategic modelling to property specification and model checking." />
   <meta property="og:title" content="Don’t Trust Your Agents, Verify Them: Strategic Verification with VITAMIN" />
   <meta property="og:description" content="AAMAS 2026 tutorial — practical strategic verification for multi-agent systems with VITAMIN." />
   <meta property="og:type" content="website" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffd60a' d='M12 2l9 4v6c0 5-3.8 9.7-9 10-5.2-.3-9-5-9-10V6l9-4z'/%3E%3Cpath fill='%23111' d='M7 7h10l-4 10H11L7 7z'/%3E%3C/svg%3E" />
+
+  <meta name="color-scheme" content="light dark" />
+
+ <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
   <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- SEO: Structured data (Event) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Event",
+    "name":"Don’t Trust Your Agents, Verify Them — Strategic Verification with VITAMIN (AAMAS 2026 Tutorial)",
+    "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+    "eventStatus":"https://schema.org/EventScheduled",
+    "startDate":"2026-05-25",
+    "location":{
+      "@type":"Place",
+      "name":"AAMAS 2026",
+      "address":{
+        "@type":"PostalAddress",
+        "addressLocality":"Paphos",
+        "addressCountry":"CY"
+      }
+    },
+    "organizer":{
+      "@type":"Organization",
+      "name":"Tutorial organisers"
+    }
+  }
+  </script>
 </head>
 
 <body>
   <a class="skip-link" href="#content">Skip to content</a>
 
-  <header class="header">
-    <div class="container nav">
+  <!-- Overlay for mobile drawer -->
+  <div class="overlay" data-overlay hidden></div>
+
+  <header class="header" data-header>
+    <div class="container header-inner">
       <div class="brand" aria-label="Tutorial website">
         <div class="logo" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 2l9 4v6c0 5-3.8 9.7-9 10-5.2-.3-9-5-9-10V6l9-4z" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M7 7h10l-4 10H11L7 7z" stroke="currentColor" stroke-width="1.8"/>
-          </svg>
+          <img
+    src="assets/img/logo.svg"
+    alt=""
+    loading="eager"
+    decoding="async"
+  />
         </div>
-        <span>VITAMIN @ AAMAS 2026</span>
+        <div class="brand-text">
+          <div class="brand-title">VITAMIN @ AAMAS 2026</div>
+          <div class="brand-sub">Strategic verification tutorial</div>
+        </div>
       </div>
 
-      <nav class="navlinks" aria-label="Primary navigation">
+      <nav class="navlinks" aria-label="Primary navigation" data-nav>
+        <a href="#overview">Overview</a>
+        <a href="#abstract">Abstract</a>
+        <a href="#outline">Outline</a>
+        <a href="#presenters">Presenters</a>
+        <a href="#materials">Materials</a>
+        <a href="#footer">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Theme toggle -->
+        <button class="theme-btn"
+                type="button"
+                data-theme-toggle
+                aria-pressed="false"
+                aria-label="Toggle dark mode"
+                title="Toggle theme">
+          <span class="theme-icn" aria-hidden="true">
+            <!-- Moon -->
+            <svg class="icn icn-moon" viewBox="0 0 24 24" fill="none">
+              <path d="M21 14.5A8.5 8.5 0 0 1 9.5 3a7 7 0 1 0 11.5 11.5Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <!-- Sun -->
+            <svg class="icn icn-sun" viewBox="0 0 24 24" fill="none">
+              <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.4 1.4M17.6 17.6 19 19M19 5l-1.4 1.4M6.4 17.6 5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+        
+        </button>
+
+        <!-- Mobile drawer button -->
+        <button class="menu-btn"
+                type="button"
+                data-menu-btn
+                aria-expanded="false"
+                aria-controls="mobileNav"
+                aria-label="Open menu">
+          <span aria-hidden="true">☰</span>
+          Menu
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <aside id="mobileNav"
+           class="mobile-drawer"
+           data-mobile
+           aria-label="Mobile navigation"
+           aria-hidden="true">
+      <div class="mobile-top">
+        <div class="mobile-title">Menu</div>
+        <button class="icon-btn" type="button" data-close-mobile aria-label="Close menu">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
+
+      <nav class="mobile-nav" aria-label="Mobile primary navigation" data-nav-mobile>
+        <a href="#overview">Overview</a>
         <a href="#abstract">Abstract</a>
         <a href="#outline">Outline</a>
         <a href="#presenters">Presenters</a>
@@ -35,81 +130,108 @@
         <a href="#contact">Contact</a>
       </nav>
 
-      <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="mobileNav">
-        <span aria-hidden="true">☰</span>
-        Menu
-      </button>
-    </div>
-
-    <div id="mobileNav" class="container mobile" data-mobile aria-label="Mobile navigation">
-      <a href="#abstract">Abstract</a>
-      <a href="#outline">Outline</a>
-      <a href="#presenters">Presenters</a>
-      <a href="#materials">Materials</a>
-      <a href="#contact">Contact</a>
-    </div>
+      <div class="mobile-foot">
+        <div class="mobile-hint">Tip: press <kbd>Esc</kbd> to close</div>
+      </div>
+    </aside>
   </header>
 
   <main id="content" class="container">
-    <section class="hero">
-      <div class="kicker">
-        <b>Half-day tutorial</b> · Strategic verification for MAS · In-person
-      </div>
-      <h1 class="h1">Don’t Trust Your Agents, Verify Them:<br/>Strategic Verification with <span style="color:var(--brand)">VITAMIN</span></h1>
-      <p class="lead">
-        Strategic reasoning and verification are key to building dependable multi-agent systems — especially in
-        safety-critical, normative, and cooperative domains. This tutorial introduces <b>VITAMIN</b>, a modular and extensible
-        framework for the strategic verification of MAS, from modelling choices to practical model checking workflows.
-      </p>
+    <!-- ===== Hero / Overview ===== -->
+    <section id="overview" class="hero">
+      <div class="hero-grid">
+        <div class="hero-main">
+          <div class="pill reveal">
+            <span class="dot" aria-hidden="true"></span>
+            Half-day tutorial · In-person · AAMAS 2026
+          </div>
 
-      <div class="actions">
-        <a class="btn primary" href="#materials">Get slides & materials</a>
-        <a class="btn" href="proposal.pdf">Download the proposal (PDF)</a>
-      </div>
+          <h1 class="h1 reveal">
+  <span class="h1-line">Don’t Trust <span class="nowrap">Your Agents</span>,</span>
+  <span class="h1-line">Verify Them</span>
 
-      <div class="grid">
-        <div class="card">
-          <h2 style="margin:0 0 6px 0;">What you’ll learn</h2>
-          <ul class="list">
-            <li>How strategic properties differ from purely temporal properties (abilities, coalitions, adversaries).</li>
-            <li>How VITAMIN separates concerns between <b>models</b>, <b>logics</b>, and <b>verification engines</b>.</li>
-            <li>How to model a MAS in VITAMIN, write strategic specifications, and run verification tasks.</li>
-            <li>How to reason about verification trade-offs (expressiveness vs scalability) in practice.</li>
-          </ul>
+  <span class="h1-sub">
+    Strategic Verification with <span class="brand-word">VITAMIN</span>
+  </span>
+</h1>
+
+          <p class="lead reveal">
+            Strategic properties talk about <b>abilities</b>, <b>coalitions</b>, and <b>adversaries</b> — not just how systems evolve over time.
+            This tutorial gives you a practical workflow with VITAMIN: modelling choices, strategic specifications, and model checking tasks.
+          </p>
+
+          <div class="actions reveal">
+            <a class="btn primary" href="#materials">Get slides & materials</a>
+            <a class="btn" href="proposal.pdf">Download proposal (PDF)</a>
+          </div>
+
+          <div class="chips reveal" aria-label="Key topics">
+            <span class="chip">ATL / CTL basics</span>
+            <span class="chip">Concurrent game structures</span>
+            <span class="chip">Coalitional abilities</span>
+            <span class="chip">Model checking workflows</span>
+          </div>
         </div>
 
-        <aside class="card meta" aria-label="Tutorial metadata">
-          <div class="badge"><strong>Conference:</strong>&nbsp;AAMAS 2026</div>
-          <div class="badge"><strong>Location:</strong>&nbsp;Paphos, Cyprus</div>
-          <div class="badge"><strong>Dates:</strong>&nbsp;25–29 May 2026</div>
-          <div class="badge"><strong>Format:</strong>&nbsp;Half-day (~3.5h)</div>
-          <hr class="soft" />
+        <aside class="panel reveal" aria-label="Tutorial quick info">
+          <div class="panel-head">
+            <div class="panel-title">Quick facts</div>
+            <div class="panel-sub">For attendees & programme</div>
+          </div>
+
           <div class="kv">
-            <div>Topic</div>
-            <div>Strategic verification · temporal & strategic logics · model checking</div>
+            <div class="k">Conference</div>
+            <div class="v">AAMAS 2026</div>
           </div>
           <div class="kv">
-            <div>Tooling</div>
-            <div>VITAMIN (open-source, Python)</div>
+            <div class="k">Location</div>
+            <div class="v">Paphos, Cyprus</div>
           </div>
           <div class="kv">
-            <div>Level</div>
-            <div>Researchers, PhD/MSc students, practitioners</div>
+            <div class="k">Dates</div>
+            <div class="v">25–29 May 2026</div>
+          </div>
+          <div class="kv">
+            <div class="k">Format</div>
+            <div class="v">Half-day (~3.5h)</div>
+          </div>
+          <div class="kv">
+            <div class="k">Tooling</div>
+            <div class="v">VITAMIN (open-source, Python)</div>
+          </div>
+
+          <div class="divider" role="separator" aria-hidden="true"></div>
+
+          <div class="callout">
+            <div class="callout-title">What you’ll be able to do</div>
+            <ul class="list checklist">
+              <li>Model a MAS as a strategic game structure.</li>
+              <li>Write strategic properties (abilities, coalitions).</li>
+              <li>Run verification tasks and interpret outcomes.</li>
+              <li>Understand trade-offs: expressiveness vs scalability.</li>
+            </ul>
           </div>
         </aside>
       </div>
     </section>
 
-    <section id="abstract" class="section">
-      <h2>Abstract</h2>
-      <div class="card">
+    <!-- ===== Abstract ===== -->
+<section id="abstract" class="abstract-band">
+  <div class="abstract-inner">
+    <header class="section-head">
+      <h2 class="reveal">Abstract</h2>
+    </header>
+
+      <div class="abstract-grid reveal">
         <p>
+          <span class="abstract-label">Context.</span>
           Many properties of interest in multi-agent systems concern not only how systems evolve over time, but also
           what agents (or coalitions) can achieve by choosing their actions strategically — e.g., coordination guarantees,
           enforceability of norms, robustness against misbehaviour, or the ability of a coalition to achieve goals despite
           adversarial behaviour.
         </p>
         <p>
+          <span class="abstract-label">Approach.</span>
           This tutorial introduces <b>VITAMIN</b> (VerIficaTion of A MulTI-Agent system), a compositional and extensible
           framework designed to make strategic verification more accessible and practically usable. VITAMIN supports
           expressive temporal and strategic logics, heterogeneous agent models, and flexible verification workflows, with
@@ -118,157 +240,242 @@
       </div>
     </section>
 
+    <!-- ===== Outline ===== -->
     <section id="outline" class="section">
-      <h2>Detailed outline</h2>
-      <p>Proposed as a half-day in-person tutorial with approximately <b>3.5 hours</b> of technical content.</p>
+      <header class="section-head">
+        <h2 class="reveal">Detailed outline</h2>
+        <p class="section-sub reveal">Half-day in-person tutorial · approx. <b>3.5 hours</b> technical content.</p>
+      </header>
 
       <div class="timeline">
-        <div class="item">
-          <div class="time">30 min</div>
-          <div class="desc">
-            <b>Introduction and Motivation</b><br/>
-            Why strategic verification for MAS? From temporal properties to strategic abilities. Application domains and challenges.
+        <div class="slot reveal">
+          <div class="t">30 min</div>
+          <div class="d">
+            <div class="title">Introduction and motivation</div>
+            <div class="text">Why strategic verification for MAS? From temporal properties to strategic abilities. Domains and challenges.</div>
           </div>
         </div>
-        <div class="item">
-          <div class="time">45 min</div>
-          <div class="desc">
-            <b>Background: Strategic Logics and Agent Models</b><br/>
-            Temporal and strategic logics (e.g., CTL, ATL). Concurrent game structures. Strategies, coalitions, objectives. Modelling assumptions and limitations.
+
+        <div class="slot reveal">
+          <div class="t">45 min</div>
+          <div class="d">
+            <div class="title">Background: strategic logics and agent models</div>
+            <div class="text">CTL/ATL intuition, concurrent game structures, strategies & coalitions, modelling assumptions and limits.</div>
           </div>
         </div>
-        <div class="item">
-          <div class="time">45 min</div>
-          <div class="desc">
-            <b>Strategic Verification in VITAMIN</b><br/>
-            Architecture and components. Supported logics and tasks. Verification workflows.
+
+        <div class="slot reveal">
+          <div class="t">45 min</div>
+          <div class="d">
+            <div class="title">Strategic verification in VITAMIN</div>
+            <div class="text">Architecture & components. Supported logics and tasks. Verification workflows.</div>
           </div>
         </div>
-        <div class="item">
-          <div class="time">60 min</div>
-          <div class="desc">
-            <b>Hands-on Modelling and Verification</b><br/>
-            Modelling a MAS in VITAMIN. Writing strategic specifications. Executing verification tasks. Analysing results.
+
+        <div class="slot reveal">
+          <div class="t">60 min</div>
+          <div class="d">
+            <div class="title">Hands-on modelling and verification</div>
+            <div class="text">Build a model, write strategic specifications, execute tasks, analyse and discuss results.</div>
           </div>
         </div>
-        <div class="item">
-          <div class="time">30 min</div>
-          <div class="desc">
-            <b>Discussion and Outlook</b><br/>
-            Open research challenges. Industrial relevance. Q&amp;A.
+
+        <div class="slot reveal">
+          <div class="t">30 min</div>
+          <div class="d">
+            <div class="title">Discussion and outlook</div>
+            <div class="text">Open research challenges, industrial relevance, Q&amp;A.</div>
           </div>
         </div>
       </div>
 
-      <div class="split" style="margin-top:18px;">
-        <div class="card">
-          <h3 style="margin:0 0 6px 0;">Target audience</h3>
-          <p>
-            Researchers, PhD students, and practitioners working on multi-agent systems, formal methods, and autonomous systems.
-            Advanced MSc students with a background in AI or distributed systems may also benefit.
-          </p>
-        </div>
-        <div class="card">
-          <h3 style="margin:0 0 6px 0;">Prerequisites</h3>
-          <ul class="list">
-            <li>Basic knowledge of multi-agent systems.</li>
-            <li>Familiarity with temporal logic is helpful but not required.</li>
-            <li>No prior experience with strategic logics or VITAMIN is expected.</li>
-          </ul>
-        </div>
-      </div>
+      <div class="two audience">
+  <div>
+    <h3 class="h3">Target audience</h3>
+    <p class="muted">
+      Researchers, PhD students, and practitioners working on multi-agent systems,
+      formal methods, and autonomous systems. Advanced MSc students with a background
+      in AI or distributed systems may also benefit.
+    </p>
+  </div>
+
+  <div>
+    <h3 class="h3">Prerequisites</h3>
+    <ul class="list">
+      <li>Basic knowledge of multi-agent systems.</li>
+      <li>Familiarity with temporal logic is helpful but not required.</li>
+      <li>No prior experience with strategic logics or VITAMIN is expected.</li>
+    </ul>
+  </div>
+</div>
     </section>
 
+    <!-- ===== Presenters ===== -->
     <section id="presenters" class="section">
-      <h2>Presenters</h2>
+      <header class="section-head">
+        <h2 class="reveal">Presenters</h2>
+        <p class="section-sub reveal">Contact details for questions, collaboration, and tutorial logistics.</p>
+      </header>
+
       <div class="people">
-        <div class="card person">
-          <div class="top">
-            <div class="avatar" aria-hidden="true">AF</div>
-            <div>
-              <p class="name">Angelo Ferrando</p>
-              <p class="aff">University of Modena and Reggio Emilia · Modena, Italy</p>
+        <article class="person reveal">
+          <div class="person-top">
+            <img class="avatar" src="assets/img/angelo.jpg" alt="Angelo Ferrando"/> 
+            <div class="person-meta">
+              <div class="name">Angelo Ferrando
+                 <a href="mailto:angelo.ferrando@unimore.it" class="mail-icn" aria-label="Email Angelo Ferrando" title="Email Angelo Ferrando">✉︎</a>
+              </div>
+              <div class="aff">University of Modena and Reggio Emilia · Modena, Italy</div>
+
             </div>
           </div>
-          <p class="bio">
+
+          <p class="muted">
             Assistant Professor. Research: multi-agent systems, formal verification, runtime verification, distributed systems.
             Core contributor to VITAMIN; teaching experience in software methods, algorithms, and distributed systems.
           </p>
-          <div class="kv">
-            <div>Email</div>
-            <div><a href="mailto:angelo.ferrando@unimore.it">angelo.ferrando@unimore.it</a></div>
-          </div>
-        </div>
+        </article>
 
-        <div class="card person">
-          <div class="top">
-            <div class="avatar" aria-hidden="true">VM</div>
-            <div>
-              <p class="name">Vadim Malvone</p>
-              <p class="aff">Télécom Paris (INFRES), Institut Polytechnique de Paris · Paris, France</p>
+        <article class="person reveal">
+          <div class="person-top">
+            <img class="avatar" src="assets/img/vadim.jpg" alt="Vadim Malvone"/>
+            <div class="person-meta">
+              <div class="name">Vadim Malvone
+                <a href="mailto:vadim.malvone@telecom-paris.fr" class="mail-icn" aria-label="Email Vadim Malvone" title="Email Vadim Malvone">✉︎</a>
+              </div>
+              <div class="aff">Télécom Paris · Paris, France</div>
             </div>
           </div>
-          <p class="bio">
+
+          <p class="muted">
             Associate Professor. Research: multi-agent systems, formal specification and verification, temporal and strategic logics,
             game-theoretic reasoning. Active contributor to the VITAMIN framework.
           </p>
-          <div class="kv">
-            <div>Email</div>
-            <div><a href="mailto:vadim.malvone@telecom-paris.fr">vadim.malvone@telecom-paris.fr</a></div>
+
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Materials ===== -->
+    <section id="materials" class="section">
+      <header class="section-head">
+        <h2 class="reveal">Slides and materials</h2>
+        <p class="section-sub reveal">
+          GitHub Pages-friendly structure: drop slide decks into <code>slides/</code>, extra resources into&nbsp;<code>materials/</code>.
+        </p>
+      </header>
+
+      <div class="two">
+        <div class="card reveal">
+          <h3 class="h3">Slides</h3>
+          <p class="muted">Suggested filename: <code>aamas2026-vitamin-tutorial.pdf</code></p>
+
+          <div class="linkgrid">
+            <a class="linkcard" href="slides/">
+              <span class="licn" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 5h12a2 2 0 0 1 2 2v12H6a2 2 0 0 1-2-2V5Z" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M18 19h2a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+              </span>
+              <span class="ltext">
+                <span class="ltitle">Open slides folder</span>
+                <span class="lsub">Upload slide decks in the repository</span>
+              </span>
+              <span class="lchev" aria-hidden="true">›</span>
+            </a>
+
+            <a class="linkcard" href="proposal.pdf">
+              <span class="licn" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M7 3h7l3 3v15a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M14 3v4h4" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M8 13h8M8 17h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="ltext">
+                <span class="ltitle">Download proposal (PDF)</span>
+                <span class="lsub">One-page tutorial proposal</span>
+              </span>
+              <span class="lchev" aria-hidden="true">›</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <h3 class="h3">Additional materials</h3>
+
+          <div class="linkgrid">
+            <a class="linkcard" href="materials/readings.md">
+              <span class="licn" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6 4h12v16H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M8 8h8M8 12h8M8 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="ltext">
+                <span class="ltitle">Recommended readings</span>
+                <span class="lsub">Curated background & references</span>
+              </span>
+              <span class="lchev" aria-hidden="true">›</span>
+            </a>
+
+            <a class="linkcard" href="materials/notes/lecture-notes.md">
+              <span class="licn" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 7h12a2 2 0 0 1 2 2v11H6a2 2 0 0 1-2-2V7Z" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M8 4h12v14" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="M7 12h8M7 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="ltext">
+                <span class="ltitle">Lecture notes</span>
+                <span class="lsub">Editable notes (Markdown)</span>
+              </span>
+              <span class="lchev" aria-hidden="true">›</span>
+            </a>
+
+            <a class="linkcard" href="materials/code/">
+              <span class="licn" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M8 9 5 12l3 3M16 9l3 3-3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 19 14 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="ltext">
+                <span class="ltitle">Hands-on code</span>
+                <span class="lsub">Optional examples & scripts</span>
+              </span>
+              <span class="lchev" aria-hidden="true">›</span>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="materials" class="section">
-      <h2>Slides and materials</h2>
-      <p>
-        The folder structure below is designed for GitHub Pages. You can drop your final slide deck(s) into <code>slides/</code>,
-        and add any extra resources in <code>materials/</code>.
-      </p>
-
-      <div class="split">
-        <div class="card">
-          <h3 style="margin:0 0 6px 0;">Slides</h3>
-          <p class="small">Place your slide deck here:</p>
-          <ul class="list">
-            <li><a href="slides/">Open the slides folder</a> (upload your files in the repository).</li>
-            <li>Suggested filename: <code>aamas2026-vitamin-tutorial.pdf</code></li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3 style="margin:0 0 6px 0;">Additional materials</h3>
-          <ul class="list">
-            <li><a href="materials/readings.md">Recommended readings</a></li>
-            <li><a href="materials/notes/lecture-notes.md">Lecture notes (editable)</a></li>
-            <li><a href="materials/code/">Hands-on code folder</a> (optional)</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <h2>Contact</h2>
-      <div class="card">
-        <p>
-          For questions about the tutorial, please contact the corresponding presenter:
-          <b>Vadim Malvone</b> — <a href="mailto:vadim.malvone@telecom-paris.fr">vadim.malvone@telecom-paris.fr</a>.
-        </p>
-        <p class="small">
-          © <span data-year></span> Tutorial organisers. This website is intended for AAMAS 2026 attendees.
-        </p>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="small">
-        Built as a lightweight, single-page site for GitHub Pages.
-        Want to tweak styling? Edit <code>assets/css/style.css</code>.
-      </div>
-    </footer>
   </main>
+
+  <footer id="footer" class="footer">
+  <div class="footer-inner">
+    <div>
+      <strong>VITAMIN @ AAMAS 2026</strong><br />
+      Strategic Verification Tutorial
+    </div>
+
+    <div class="footer-meta">
+      <span>Paphos, Cyprus · May 2026</span><br />
+      <span>© Tutorial organisers</span><br />
+      <span>
+        Enquiries:
+        <a href="mailto:vadim.malvone@telecom-paris.fr">
+          vadim.malvone@telecom-paris.fr
+        </a>
+      </span>
+    </div>
+  </div>
+</footer>
 
   <script src="assets/js/main.js"></script>
 </body>
 </html>
+
